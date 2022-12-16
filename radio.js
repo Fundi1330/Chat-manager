@@ -1,6 +1,3 @@
-//LiteLoaderScript Dev Helper
-/// <reference path="c:/Users\LenovoG580\Documents\ll/JS/HelperLib-master/src/index.d.ts"/> 
-
 let radius = 100 //Radius of local message (in blocks)
 let globalPrefix = '[Radio]' //Prefix that marks message as global
 let localPrefix = '[L]'
