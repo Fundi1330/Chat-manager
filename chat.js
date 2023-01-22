@@ -1,11 +1,9 @@
-//LiteLoaderScript Dev Helper
-/// <reference path="c:/Users\LenovoG580\Documents\ll/JS/HelperLib-master/src/index.d.ts"/> 
 
 let radius = 100 //Radius of local message (in blocks)
-let globalPrefix = '[Radio]' //Prefix that marks message as global
+let globalPrefix = '[G]' //Prefix that marks message as global
 let localPrefix = '[L]'
 let headChat = true //Displays messages above player's head
-	let smallMessage = 10 //Amount of symbols that small message has
+let smallMessage = 10 //Amount of symbols that small message has
 
 let useMuteSystem = true //Set to true if you are using this script witn MixerAPI
 //yes, I could make it in JSON but I don't want to
@@ -18,16 +16,11 @@ function setHeadMsg(mes, plr) {
 	}
 	if(mes.length >= smallMessage){
 		setTimeout(nameback, mes.length * 500)
-	}else{
+	} else{
 		setTimeout(nameback, mes.length * 1000)
 	}
 }
 
-mc.listen('onInventoryChange', (player,slotNum,oldItem,newItem) => { 
-    if(newItem.type = 'minecraft:iron_ingot') { 
-        newItem.setLore(['§r§eИспользуйте этот предмет, чтобы', '§r§eнаписать в глобальный чат'])
-    } 
-})
 
 function sendMsgToChat(type, mssg, name, x, y, z){
 	switch(type){
@@ -52,24 +45,21 @@ mc.listen('onChat', function(player, msg){
 		return false
 	}
 	if (headChat && !muteMsg) {
-		if (player.getHand() != null && player.getHand().type == 'minecraft:iron_ingot') {
-                if (isGlobal){
-                    msg = msg.replace()
-                    setHeadMsg(msg, player)
-                }
-                }else{
-                    setHeadMsg(msg, player)
-                }
+		if (isGlobal){
+			msg = msg.replace()
+			setHeadMsg(msg, player)
+		} else{
+			setHeadMsg(msg, player)
+		}
 	}
 	if (!muteMsg){
-		if (player.getHand() != null && player.getHand().type == 'minecraft:iron_ingot') {
-                if (isGlobal){
-                    sendMsgToChat(1, msg, rname, x, y, z)
-                    return false
-                }
-            }else{
-                sendMsgToChat(0, msg, rname, x, y, z)
-                return false
-            }
+		if (isGlobal){
+			sendMsgToChat(1, msg, rname, x, y, z)
+			return false
+		}
+		else{
+			sendMsgToChat(0, msg, rname, x, y, z)
+			return false
+		}
 	}
 })
