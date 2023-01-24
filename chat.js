@@ -1,65 +1,36 @@
+let radius = 100; //Radius of local message (in blocks)
+let globalPrefix = '[G]'; //Global message prefix
+let localPrefix = '[L]'; //Local message prefix
 
-let radius = 100 //Radius of local message (in blocks)
-let globalPrefix = '[G]' //Prefix that marks message as global
-let localPrefix = '[L]'
-let headChat = true //Displays messages above player's head
-let smallMessage = 10 //Amount of symbols that small message has
-
-let useMuteSystem = true //Set to true if you are using this script witn MixerAPI
-//yes, I could make it in JSON but I don't want to
-
-function setHeadMsg(mes, plr) {
-	let name = plr.realName
-	plr.rename(`${name}\n>> ${mes}`)
-	function nameback(){
-		plr.rename(plr.realName)
-	}
-	if(mes.length >= smallMessage){
-		setTimeout(nameback, mes.length * 500)
-	} else{
-		setTimeout(nameback, mes.length * 1000)
-	}
-}
+let prefix = true; // prefix plugin
 
 
-function sendMsgToChat(type, mssg, name, x, y, z){
+function sendMsgToChat(type, msg, name, x, y, z){
 	switch(type){
 		case 0:
-			mc.runcmd(`tellraw @a[x=${x},y=${y},z=${z},r=${radius}] {"rawtext":[{"text":"${localPrefix} ${name}: ${mssg}"}]}`)
+			mc.runcmd(`tellraw @a[x=${x},y=${y},z=${z},r=${radius}] {"rawtext":[{"text":"${localPrefix} ${name} > ${msg}"}]}`);
 			break;
 		case 1:
-			mc.runcmd(`tellraw @a {"rawtext":[{"text":"${globalPrefix}${name}: ${mssg}"}]}`)
+			mc.runcmd(`tellraw @a {"rawtext":[{"text":"${globalPrefix} ${name} > ${msg}"}]}`);
 			break;
 	}
 }
-mc.listen('onChat', function(player, msg){
-	let isMuted = player.hasTag(`is_muted`)
-	let rname = player.realName
-	let x = player.pos.x
-	let y = player.pos.y
-	let z = player.pos.z
-    let isGlobal = msg[0] 
-	let muteMsg
-	if (isMuted && useMuteSystem){
-        muteMsg = true
-		return false
-	}
-	if (headChat && !muteMsg) {
-		if (isGlobal){
-			msg = msg.replace()
-			setHeadMsg(msg, player)
-		} else{
-			setHeadMsg(msg, player)
-		}
-	}
-	if (!muteMsg){
-		if (isGlobal){
-			sendMsgToChat(1, msg, rname, x, y, z)
-			return false
-		}
-		else{
-			sendMsgToChat(0, msg, rname, x, y, z)
-			return false
-		}
+
+mc.listen('onChat', function(player, msg) {
+	let name = player.name;
+	let rname = player.realName;
+	let x = player.pos.x;
+	let y = player.pos.y;
+	let z = player.pos.z;
+    let isGlobal = false; 
+	let globalSymbol = '!';
+	if (msg[0] === globalSymbol) isGlobal = true;
+	if (isGlobal){
+		msg = msg.replace(globalSymbol,'');
+		sendMsgToChat(1, msg, rname, x, y, z);
+		return false;
+	} else {
+		prefix ? sendMsgToChat(0, msg, name, x, y, z) : sendMsgToChat(0, msg, rname, x, y, z); // if u use my prefix plugin send player name else player real name
+		return false;
 	}
 })
