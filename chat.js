@@ -1,8 +1,8 @@
-let radius = 100; //Radius of local message (in blocks)
-let globalPrefix = '[G]'; //Global message prefix
-let localPrefix = '[L]'; //Local message prefix
+const radius = 100; //Radius of local message (in blocks)
+const globalPrefix = '[G]'; //Global message prefix
+const localPrefix = '[L]'; //Local message prefix
 
-let prefix = true; // prefix plugin
+const prefix = true; // prefix plugin
 
 
 function sendMsgToChat(type, msg, name, x, y, z){
@@ -17,13 +17,13 @@ function sendMsgToChat(type, msg, name, x, y, z){
 }
 
 mc.listen('onChat', function(player, msg) {
-	let name = player.name;
-	let rname = player.realName;
-	let x = player.pos.x;
-	let y = player.pos.y;
-	let z = player.pos.z;
-    let isGlobal = false; 
-	let globalSymbol = '!';
+	const name = player.name;
+	const rname = player.realName;
+	const x = player.pos.x;
+	const y = player.pos.y;
+	const z = player.pos.z;
+        let isGlobal = false; 
+	const globalSymbol = '!';
 	if (msg[0] === globalSymbol) isGlobal = true;
 	if (isGlobal){
 		msg = msg.replace(globalSymbol,'');
