@@ -1,4 +1,4 @@
-# chat manager
+# Chat manager
 Chat manager is a powerful plugin for making what you want with chat. It is a port of Java Chat Manager.
 # Features:
 * Local and global chat system
