@@ -1,6 +1,12 @@
 # chat manager
-Chat manager is a powerful plugin with elastic config.
-# todo list 
+Chat manager is a powerful plugin for making what you want with chat. It is a port of Java Chat Manager.
+# Features:
+* Local and global chat system
+* Good Configuration
+* Banwords system
+* Simple chat-bot
+* Prefix system
+# Todo list:
 * Auto-moderation 
 * ~~Better configuration~~
 * ~~chat-bot~~
