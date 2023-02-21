@@ -8,7 +8,7 @@ Chat manager is a powerful plugin for making what you want with chat. It is a po
 * Prefix system
 # Screenshots:
 ![Local chat](img/Screenshot_21.png)<br>
-![Global chat](img/Screenshot_22.png)
+![Global chat](img/Screenshot_22.png)<br>
 ![Chat bot](img/Screenshot_23.png)
 # Todo list:
 * Auto-moderation 
