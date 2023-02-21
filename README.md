@@ -2,6 +2,6 @@
 Chat manager is a powerful plugin with elastic config.
 # todo list 
 * Auto-moderation 
-* Better configuration 
+* ~~Better configuration~~
 * Module system 
 * ~~chat-bot~~
