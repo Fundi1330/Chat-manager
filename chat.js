@@ -1,8 +1,5 @@
 const config = require('./config.js');
 
-
-
-
 const banwords = config.get('banwords');
 const radius = config.get('radius');
 const globalPrefix = config.get('globalPrefix');
