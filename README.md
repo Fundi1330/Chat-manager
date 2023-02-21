@@ -4,4 +4,4 @@ Chat manager is a powerful plugin with elastic config.
 * Auto-moderation 
 * Better configuration 
 * Module system 
-* chat-bot
+* ~~chat-bot~~
