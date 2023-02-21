@@ -1,7 +1,3 @@
-//LiteLoaderScript Dev Helper
-/// <reference path="c:\Users\LenovoG580\Documents\ll/dts/HelperLib-master/src/index.d.ts"/> 
-
-
 const config = new JsonConfigFile('./plugins/chatmanager/config.json');
 
 config.init('banwords', []);
