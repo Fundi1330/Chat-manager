@@ -1,8 +1,17 @@
-const radius = 100; //Radius of local message (in blocks)
-const globalPrefix = '[G]'; //Global message prefix
-const localPrefix = '[L]'; //Local message prefix
+//LiteLoaderScript Dev Helper
+/// <reference path="c:\Users\LenovoG580\Documents\ll/dts/HelperLib-master/src/index.d.ts"/> 
+const config = require('./config.js');
 
-const prefix = true; // prefix plugin
+
+
+
+const banwords = config.get('banwords');
+const radius = config.get('radius');
+const globalPrefix = config.get('globalPrefix');
+const localPrefix = config.get('localPrefix');
+const prefix = config.get('prefix');
+const banwordMessage = config.get('bandowrdMessage');
+const globalSymbol = config.get('globalSymbol');
 
 
 function sendMsgToChat(type, msg, name, x, y, z){
@@ -17,20 +26,34 @@ function sendMsgToChat(type, msg, name, x, y, z){
 }
 
 mc.listen('onChat', function(player, msg) {
-	const name = player.name;
-	const rname = player.realName;
-	const x = player.pos.x;
-	const y = player.pos.y;
-	const z = player.pos.z;
-        let isGlobal = false; 
-	const globalSymbol = '!';
-	if (msg[0] === globalSymbol) isGlobal = true;
-	if (isGlobal){
-		msg = msg.replace(globalSymbol,'');
-		sendMsgToChat(1, msg, rname, x, y, z);
-		return false;
-	} else {
-		prefix ? sendMsgToChat(0, msg, name, x, y, z) : sendMsgToChat(0, msg, rname, x, y, z); // if u use my prefix plugin send player name else player real name
-		return false;
-	}
+	let name = player.name;
+	let rname = player.realName;
+	let x = player.pos.x;
+	let y = player.pos.y;
+	let z = player.pos.z;
+    let isGlobal = false;
+	
+	const words = msg.split();
+
+    words.forEach(word => {
+        for(let i = 0; i < words.length; i++) {
+            if (!banwords.includes(word)) {
+				if (msg[0] === globalSymbol) isGlobal = true;
+				if (isGlobal){
+					msg = msg.replace(globalSymbol,'');
+					sendMsgToChat(1, msg, rname, x, y, z);
+				} else {
+					prefix ? sendMsgToChat(0, msg, name, x, y, z) : sendMsgToChat(0, msg, rname, x, y, z); // if u use my prefix plugin send player name else player real name
+				}
+            }
+			else {
+				player.tell(banwordMessage);
+			}
+        }
+    });
+	return false;
+	
+	
 })
+
+module.exports = null;
