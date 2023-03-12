@@ -1,0 +1,30 @@
+{
+    "format_version": 1,
+    "tooth": "github.com/Tooth-Hub/Chat-manager",
+    "version": "1.0.0",
+    "dependencies": {
+        "github.com/tooth-hub/liteloaderbds": [
+            ["2.10.x"]
+        ]
+    },
+    "information": {
+        "name": "Chat manager",
+        "description": "port of java chat manager plugin",
+        "author": "Fundi1330",
+        "license": "ISC",
+        "homepage": "https://github.com/Fundi1330/Chat-manager"
+    },
+    "placement": [
+        {
+            "source": "main.js",
+            "destination": "plugins/main.js"
+        },
+        {
+            "source": "chatmanager/*",
+            "destination": "plugins/chatmanager/*"
+        }
+    ],
+	"possession": [
+		"<private directory of your tooth ends with '/'>"
+	]
+}
