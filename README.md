@@ -18,10 +18,10 @@ Chat manager is a powerful plugin for making what you want with chat. It is a po
 ![Command log](img/Screenshot_41.png)<br>
 ![Chat log](img/Screenshot_42.png)
 # Todo list:
-* Auto-moderation 
+* Auto-moderation(only banwords working correctly)
 * ~~Better configuration~~
 * ~~chat-bot~~
-* commands
+* commands(only mute finished)
 * chat formating and editing(like clearing chat, grammar, etc.)
 * moderation
 * custom messages
