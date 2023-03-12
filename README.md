@@ -12,11 +12,11 @@ Chat manager is a powerful plugin for making what you want with chat. It is a po
 ![Local chat](img/Screenshot_21.png)<br>
 ![Global chat](img/Screenshot_22.png)<br>
 ![Chat bot](img/Screenshot_23.png)<br>
-![Mute system](img/Screenshot_38.png)<br>
-(img/Screenshot_40.png)<br>
-(img/Screenshot_39.png)<br>
-![Logs](img/Screenshot_41.png)<br>
-(img/Screenshot_42.png)
+![Mutes example](img/Screenshot_38.png)<br>
+![Unmute message](img/Screenshot_40.png)<br>
+![Mute message](img/Screenshot_39.png)<br>
+![Command log](img/Screenshot_41.png)<br>
+![Chat log](img/Screenshot_42.png)
 # Todo list:
 * Auto-moderation 
 * ~~Better configuration~~
