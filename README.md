@@ -22,9 +22,8 @@ Chat manager is a powerful plugin for making what you want with chat. It is a po
 * ~~Better configuration~~
 * ~~chat-bot~~
 * commands
-* ban commands
 * chat formating and editing(like clearing chat, grammar, etc.)
 * moderation
 * custom messages
-* logs
+* ~~logs~~
 * and other features
