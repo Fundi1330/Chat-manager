@@ -1,10 +1,12 @@
 {
     "format_version": 1,
-    "tooth": "github.com/Tooth-Hub/Chat-manager",
+    "tooth": "github.com/Fundi1330/Chat-manager",
     "version": "1.0.0",
     "dependencies": {
-        "github.com/tooth-hub/liteloaderbds": [
-            ["2.10.x"]
+        "github.com/Tooth-Hub/LiteLoaderBDS": [
+            [
+                ">=2.9.0"
+            ]
         ]
     },
     "information": {
@@ -17,14 +19,36 @@
     "placement": [
         {
             "source": "main.js",
-            "destination": "plugins/main.js"
+            "destination": "plugins/nodejs/chat-manager/main.js"
+        },
+        {
+            "source": "bot.js",
+            "destination": "plugins/nodejs/chat-manager/bot.js"
+        },
+        {
+            "source": "chat.js",
+            "destination": "plugins/nodejs/chat-manager/chat.js"
+        },
+        {
+            "source": "commands.js",
+            "destination": "plugins/nodejs/chat-manager/commands.js"
+        },
+        {
+            "source": "config.js",
+            "destination": "plugins/nodejs/chat-manager/config.js"
+        },
+        {
+            "source": "logger.js",
+            "destination": "plugins/nodejs/chat-manager/logger.js"
+        },
+        {
+            "source": "prefixes.js",
+            "destination": "plugins/nodejs/chat-manager/prefixes.js"
         },
         {
             "source": "chatmanager/*",
             "destination": "plugins/chatmanager/*"
         }
     ],
-	"possession": [
-		"<private directory of your tooth ends with '/'>"
-	]
+	"possession": []
 }
