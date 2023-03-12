@@ -4,6 +4,10 @@
 const config = require('./config.js');
 
 const mute = config.get('commands');
+const playerMutedMessage = config.get('playerMutedMessage');
+const mutePlayerMessage = config.get('mutePlayerMessage');
+const playerUnmutedMessage = config.get('playerUnmutedMessage');
+const unmutePlayerMessage = config.get('unmutePlayerMessage');
 
 const  muteDB = new KVDatabase('./plugins/chatmanager/mutes');
 
@@ -18,8 +22,8 @@ mc.listen('onServerStarted', () => {
             const player = res.player[0];
             if (ori.player == undefined || player == undefined) return out.error('choosen player is not on the server');
             muteDB.set(player.realName, false);
-            player.tell("You've been unmuted!", 5);
-            return out.success('Succefully unmuted player!');
+            player.tell(playerUnmutedMessage, 5);
+            return out.success(unmutePlayerMessage);
         })
 
         muteCmd.mandatory('player', ParamType.Player);
@@ -28,8 +32,8 @@ mc.listen('onServerStarted', () => {
             const player = res.player[0];
             if (ori.player == undefined || player == undefined) return out.error('choosen player is not on the server');
             muteDB.set(player.realName, true);
-            player.tell("You've been muted!", 5);
-            return out.success('Succefully muted player!');
+            player.tell(playerMutedMessage, 5);
+            return out.success(mutePlayerMessage );
         });
         muteCmd.setup();
         unMuteCmd.setup();

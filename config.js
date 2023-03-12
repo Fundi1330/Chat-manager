@@ -4,8 +4,11 @@
 
 const config = new JsonConfigFile('./plugins/chatmanager/config.json');
 
-
-config.init('banwords', []);
+config.init('auto-mod', {
+    'banwords': true,
+    'anti-caps': false
+})
+config.init('banwordsList', []);
 config.init('banwordMessage', 'your message contains banword');
 config.init('capsPercentage', 50);
 config.init('capsMessage', 'your message have too many caps');
@@ -24,6 +27,10 @@ config.init('logs', {
 config.init('commands', {
     'mute': true
 });
+config.init('playerMutedMessage', "You've been muted!");
+config.init('mutePlayerMessage', 'Succefully muted player!');
+config.init('playerUnmutedMessage', "You've been unmuted!");
+config.init('unmutePlayerMessage', 'Succefully unmuted player!');
 
 config.close();
 

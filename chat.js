@@ -2,10 +2,8 @@
 /// <reference path="c:\Users\LenovoG580\Documents\ll/dts/HelperLib-master/src/index.d.ts"/> 
 const config = require('./config.js');
 const muteDB = require('./commands.js');
-const prefixDB = require('./prefixes.js');
-
-
-const banwords = config.get('banwords');
+const autoMod = config.get('auto-mod');
+const banwords = config.get('banwordsList');
 const radius = config.get('radius');
 const globalPrefix = config.get('globalPrefix');
 const localPrefix = config.get('localPrefix');
@@ -38,43 +36,40 @@ mc.listen('onChat', function(player, msg) {
 
 	if (isMute) return false;
 
-	let words = msg.split(' ');
-
-	if (words[0][0] === globalSymbol) words[0] = words[0].replace(globalSymbol, '');
-
-
-    words.every(word => {
-		let capsWords;
-		let hasCaps = true;
-
-		if (word.match(/[A-Z]/g) != undefined) {
-			capsWords = word.match(/[A-Z]/g);
-			
-		} else {
-			hasCaps = false;
-		}
-
-		if (banwords.includes(word.toLowerCase())) {
-			player.tell(banwordMessage);
-			return false;
-		} else if (hasCaps && capsWords.length >= word.length * caps / 100) {
-			
-			player.tell(capsMessage);
-			return false;
-		}
-		
-		else {
-			if (msg[0] === globalSymbol) isGlobal = true;
-			if (isGlobal){
-				msg = msg.replace(globalSymbol,'');
-				sendMsgToChat(1, msg, rname, x, y, z);
-			} else {
-				prefix ? sendMsgToChat(0, msg, name, x, y, z) : sendMsgToChat(0, msg, rname, x, y, z); // if u use my prefix plugin send player name else player real name
+	if (autoMod['banwords']) {
+		let words = msg.split(' ');
+		if (words[0][0] === globalSymbol) words[0] = words[0].replace(globalSymbol, '');
+		words.every(word => {
+			let capsWords;
+			let hasCaps;
+			if (autoMod['anti-caps']) {
+				hasCaps = true;
+				if (word.match(/[A-Z]/g) != undefined) {
+					capsWords = word.match(/[A-Z]/g);
+					
+				} else {
+					hasCaps = false;
 			}
-		}
-    });
+			}
 
-	
+			if (banwords.includes(word.toLowerCase())) {
+				player.tell(banwordMessage);
+				return false;
+			} else if (hasCaps && capsWords.length >= word.length * caps / 100 && autoMod['anti-caps']) {
+				player.tell(capsMessage);
+				return false;
+			}
+			else {
+				if (msg[0] === globalSymbol) isGlobal = true;
+				if (isGlobal) {
+					msg = msg.replace(globalSymbol,'');
+					sendMsgToChat(1, msg, rname, x, y, z);
+				} else {
+					prefix ? sendMsgToChat(0, msg, name, x, y, z) : sendMsgToChat(0, msg, rname, x, y, z); // if u use my prefix plugin send player name else player real name
+				}
+			}
+		});
+	}
 	
 	return false;
 	
