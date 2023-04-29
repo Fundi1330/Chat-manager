@@ -1,5 +1,5 @@
 //LiteLoaderScript Dev Helper
-/// <reference path="c:\Users\LenovoG580\Documents\ll/dts/HelperLib-master/src/index.d.ts"/> 
+/// <reference path="c:\Users\LenovoG580\Documents\ll\dts/dts/HelperLib-master/src/index.d.ts"/> 
 
 const config = require('./config.js');
 const prefixDB = require('./prefixes.js');

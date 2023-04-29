@@ -1,12 +1,12 @@
 //LiteLoaderScript Dev Helper
-/// <reference path="c:\Users\LenovoG580\Documents\ll/dts/HelperLib-master/src/index.d.ts"/> 
+/// <reference path="c:\Users\LenovoG580\Documents\ll\dts/dts/HelperLib-master/src/index.d.ts"/> 
 
 
 const config = new JsonConfigFile('./plugins/chatmanager/config.json');
 
 config.init('auto-mod', {
     'banwords': true,
-    'anti-caps': false
+    'anti-caps': true
 })
 config.init('banwordsList', []);
 config.init('banwordMessage', 'your message contains banword');
