@@ -1,16 +1,19 @@
-//LiteLoaderScript Dev Helper
-/// <reference path="c:\Users\LenovoG580\Documents\ll\dts/dts/HelperLib-master/src/index.d.ts"/> 
-
+// LiteLoader-AIDS automatic generated
+/// <reference path="c:\Users\LenovoG580\Documents\ll/dts/HelperLib-master/src/index.d.ts"/> 
 
 const config = new JsonConfigFile('./plugins/chatmanager/config.json');
 
 config.init('auto-mod', {
     'banwords': true,
-    'anti-caps': true
+    'anti-caps': true,
+    'messageLenghtLimit': true,
+    'anti-spam': true
 })
 config.init('banwordsList', []);
 config.init('banwordMessage', 'your message contains banword');
-config.init('capsPercentage', 50);
+config.init('capsPercentage', 0.5);
+config.init('spamRate', 5);
+config.init('spamPer', 8);
 config.init('capsMessage', 'your message have too many caps');
 config.init('radius', 100);
 config.init('globalPrefix', '[G]');
@@ -27,10 +30,13 @@ config.init('logs', {
 config.init('commands', {
     'mute': true
 });
+config.init('messageLenghtLimit', 200);
 config.init('playerMutedMessage', "You've been muted!");
 config.init('mutePlayerMessage', 'Succefully muted player!');
 config.init('playerUnmutedMessage', "You've been unmuted!");
 config.init('unmutePlayerMessage', 'Succefully unmuted player!');
+config.init('messageLenght', "Your message lenght is too high!");
+config.init('spamMessage', "Don't spam!")
 
 config.close();
 

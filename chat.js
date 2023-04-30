@@ -13,7 +13,11 @@ const banwordMessage = config.get('banwordMessage');
 const globalSymbol = config.get('globalSymbol');
 const caps = config.get('capsPercentage');
 const capsMessage = config.get('capsMessage');
-
+const lenghtMessage = config.get('messageLenght');
+const messageLenght = config.get('messageLenghtLimit');
+const rate = config.get('spamRate');
+const per = config.get('spamPer');
+const spamMessage = config.get('spamMessage');
 
 function sendMsgToChat(type, msg, name, x, y, z){
 	switch(type){
@@ -36,12 +40,31 @@ mc.listen('onChat', function(player, msg) {
 	let isMute = muteDB.get(rname);
 	let hasBanwords = false;
 	let hasCaps = false;
+	let hasSpam = false;
+	let normalLenght = false;
+	
+	let words = msg.split(' ');
+	if (words[0][0] === globalSymbol) words[0] = words[0].replace(globalSymbol, '');
 
 	if (isMute) return false;
 
+	if (autoMod['messageLenghtLimit']) {
+		if (msg.length >= messageLenght) {
+			player.tell(lenghtMessage);
+			normalLenght = true;
+			return false;
+		}
+	}
+
+	// if (autoMod['anti-spam']) {
+	// 	if(!floodProtection.check()) {
+	// 		player.tell(spamMessage);
+	// 		hasSpam = true;
+	// 		return false;
+	// 	}
+	// }
+
 	if (autoMod['banwords']) {
-		let words = msg.split(' ');
-		if (words[0][0] === globalSymbol) words[0] = words[0].replace(globalSymbol, '');
 		for (const word of words) {
 			if (banwords.includes(word.toLowerCase())) {
 				player.tell(banwordMessage);
@@ -49,31 +72,35 @@ mc.listen('onChat', function(player, msg) {
 				return false;
 			}
 		}
-		words.forEach(word => {
-			let capsWords;
+	}
+	if (autoMod['anti-caps']) {
+		let capsWords = 0;
+		let isCapsMsg = false;
+		if (msg.match(/[A-Z]/g) != undefined) {
+			isCapsMsg = true;
+			capsWords += msg.match(/[A-Z]/g).length;
+		} if (msg.match(/[А-ЯҐЄІЇ]/g) != undefined) {
+			isCapsMsg = true;
+			capsWords += msg.match(/[А-ЯҐЄІЇ]/g).length;
+		} if (msg.match(/[А-Я]/g) != undefined) {
+			isCapsMsg = true;
+			capsWords += msg.match(/[А-Я]/g).length;
+		}
+		log(capsWords)
+		if (isCapsMsg && (capsWords / msg.replace(/\s/g, '').length) >= caps ) {
+			player.tell(capsMessage);
+			hasCaps = true;
+			return false;
+		}
+	}
 
-			if (autoMod['anti-caps']) {
-				log(msg.match(/[A-Z]/g) != undefined);
-				if (msg.match(/[A-Z]/g) != undefined) {
-					hasCaps = true;
-					capsWords = word.match(/[A-Z]/g);
-					
-				}
-			}
-			if (hasCaps && capsWords.length >= caps / 100 * words.length && autoMod['anti-caps']) {
-				player.tell(capsMessage);
-				return false;
-			}
-		});
-		log(caps / 100 * words.length);
-		if(!hasBanwords && !hasCaps) {
-			if (msg[0] === globalSymbol) isGlobal = true;
-			if (isGlobal) {
-				msg = msg.replace(globalSymbol,'');
-				sendMsgToChat(1, msg, rname, x, y, z);
-			} else {
-				prefix ? sendMsgToChat(0, msg, name, x, y, z) : sendMsgToChat(0, msg, rname, x, y, z); // if u use my prefix plugin send player name else player real name
-			}
+	if(!hasBanwords && !hasCaps && !normalLenght) {
+		if (msg[0] === globalSymbol) isGlobal = true;
+		if (isGlobal) {
+			msg = msg.replace(globalSymbol,'');
+			sendMsgToChat(1, msg, rname, x, y, z);
+		} else {
+			prefix ? sendMsgToChat(0, msg, name, x, y, z) : sendMsgToChat(0, msg, rname, x, y, z); // if u use my prefix plugin send player name else player real name
 		}
 	}
 	

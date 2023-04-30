@@ -1,7 +1,7 @@
 {
   "name": "chat-manager",
   "version": "0.0.1",
-  "description": "Port of java chat manager",
+  "description": "Port of java chat manager to LiteLoaderBDS",
   "main": "main.js",
   "scripts": {
     "test": "exit"
@@ -14,7 +14,12 @@
   },
   "keywords": [
     "plugin",
-    "liteloader"
+    "liteloader",
+    "liteloaderbds",
+    "ll",
+    "llbds",
+    "minecraft",
+    "minecraft-bedrock"
   ],
   "bugs": {
     "url": "https://github.com/Fundi1330/Chat-manager/issues"
