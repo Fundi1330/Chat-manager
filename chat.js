@@ -5,7 +5,7 @@ const config = require('./config.js');
 const muteDB = require('./commands.js');
 const autoMod = config.get('auto-mod');
 const banwords = config.get('banwordsList');
-const radius = config.get('radius');
+const radius = config.get('localMessageRadius');
 const globalPrefix = config.get('globalPrefix');
 const localPrefix = config.get('localPrefix');
 const prefix = config.get('prefix');
@@ -86,7 +86,6 @@ mc.listen('onChat', function(player, msg) {
 			isCapsMsg = true;
 			capsWords += msg.match(/[А-Я]/g).length;
 		}
-		log(capsWords)
 		if (isCapsMsg && (capsWords / msg.replace(/\s/g, '').length) >= caps ) {
 			player.tell(capsMessage);
 			hasCaps = true;
