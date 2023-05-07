@@ -8,7 +8,8 @@ Chat manager is a powerful plugin for making what you want with chat. It is a po
 * Prefix system
 * Anti-caps
 * Simple mute system
-* Message lenght limit
+* Anti-spam
+* Message length limit
 # Todo list:
 * Improve auto-moderation
 * commands(only mute finished)
