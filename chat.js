@@ -16,10 +16,14 @@ const capsMessage = config.get('capsMessage');
 const lenghtMessage = config.get('messageLenght');
 const messageLenght = config.get('messageLenghtLimit');
 const rate = config.get('spamRate');
-const per = config.get('spamPer');
 const spamMessage = config.get('spamMessage');
+const muteTime = config.get('muteTime');
+const playerUnmutedMessage = config.get('playerUnmutedMessage');
+const autoMuteMessage = config.get('autoMuteMessage');
 
-function sendMsgToChat(type, msg, name, x, y, z){
+const spamDatabase = new KVDatabase('./plugins/chatmanager/spam');
+
+function sendMsgToChat(type, msg, name, x, y, z) {
 	switch(type){
 		case 0:
 			mc.runcmd(`tellraw @a[x=${x},y=${y},z=${z},r=${radius}] {"rawtext":[{"text":"${localPrefix} ${name} > ${msg}"}]}`);
@@ -56,13 +60,31 @@ mc.listen('onChat', function(player, msg) {
 		}
 	}
 
-	// if (autoMod['anti-spam']) {
-	// 	if(!floodProtection.check()) {
-	// 		player.tell(spamMessage);
-	// 		hasSpam = true;
-	// 		return false;
-	// 	}
-	// }
+	if (autoMod['anti-spam']) {
+		
+        if (spamDatabase.get(player.realName) == undefined || spamDatabase.get(player.realName) == '' || spamDatabase.get(player.realName) == ' ' 
+		|| spamDatabase.get(player.realName) == null || typeof spamDatabase.get(player.realName) == 'number' || 
+		spamDatabase.get(player.realName) == []) {
+			let getPl = spamDatabase.get(player.realName);
+			spamDatabase.set(player.realName, getPl.concat(msg));
+        }
+		if (spamDatabase.get(player.realName).includes(msg)) {
+			let getPl = spamDatabase.get(player.realName);
+			spamDatabase.set(player.realName, getPl.concat(msg));
+		}
+		if (spamDatabase.get(player.realName).length >= rate) {
+			player.tell(spamMessage);
+			hasSpam = true;
+			spamDatabase.set(player.realName, []);
+			muteDB.set(player.realName, true);
+			player.tell(autoMuteMessage, 5);
+			setTimeout(() => {
+				muteDB.set(player.realName, false);
+				player.tell(playerUnmutedMessage, 5);
+			}, muteTime);
+			return false;
+		}
+	}
 
 	if (autoMod['banwords']) {
 		for (const word of words) {

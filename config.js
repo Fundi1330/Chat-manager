@@ -18,7 +18,6 @@ config.init('capsPercentage', 0.5);
 config.init('capsMessage', 'your message have too many caps');
 // spam
 config.init('spamRate', 5);
-config.init('spamPer', 8);
 config.init('spamMessage', "Don't spam!")
 // message lenght limit
 config.init('messageLenghtLimit', 200);
@@ -48,10 +47,14 @@ config.init('logs', {
 config.init('commands', {
     'mute': true
 });
+// mute
+config.init('muteTime', 60000);
+config.init('autoMuteMessage', `You have been muted for ${config.get('muteTime') / 1000} seconds`)
 config.init('playerMutedMessage', "You've been muted!");
 config.init('mutePlayerMessage', 'Succefully muted player!');
 config.init('playerUnmutedMessage', "You've been unmuted!");
 config.init('unmutePlayerMessage', 'Succefully unmuted player!');
+
 
 config.close();
 
