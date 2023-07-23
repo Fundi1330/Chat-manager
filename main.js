@@ -8,7 +8,7 @@ const commands = require('./commands.js')
 ll.registerPlugin(
 	"Chat manager",
 	"port of java chat manager plugin",
-	[1, 0, 0],
+	[1, 0, 1],
 	{'Author': 'Fundi1330'}
 );
 
